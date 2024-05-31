@@ -1,6 +1,6 @@
 node_modules/
 /vendor
 dist/
-uploads/
+/uploads
 composer.lock
 package-lock.json
