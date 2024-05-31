@@ -39,27 +39,55 @@ document.getElementById('createJsonBtn').addEventListener('click', function() {
 //convert button
 document.getElementById('convertBtn').addEventListener('click', function() {
     const client = contentful.createClient({
-      accessToken: 'dH3_18uD44VF8xD50QaFz6lD-D6LMa7uvKyqvOqNuFs',
-      space: 'xc32zku7u63j'
-    });
+        accessToken: 'Bearer dH3_18uD44VF8xD50QaFz6lD-D6LMa7wuvKyqvOqNuFs',
+        space: 'xc32zku7u63j'
+      });
+      
+      client.getSpace('xc32zku7u63j')
+      .then((space) => space.getEnvironment('master'))
+      .then((environment) => environment.getEntries())
+      .then((entries) => {
+        console.log(entries.items);
+      })
+      .catch((error) => {
+        if (error.status === 404) {
+          console.error('Space or environment not found');
+        } else if (error.status === 401) {
+          console.error('Invalid access token');
+        } else {
+          console.error('Error retrieving entries:', error);
+        }
+      });
 
-    client.getSpace()
-    .then((space) => space.getEnvironment('master'))
-    .then((environment) => environment.createEntry('article', {
-      fields: {
-        title: {
-          'en-US': 'Title of Your New Article'
-        },
-        body: {
-          'en-US': 'Content of your article goes here...'
-        },
-        // Add other fields as necessary
-      }
-    }))
-    .then((entry) => {
-      console.log(entry);
-      return entry.publish();  // Optionally publish the entry
-    })
-    .catch(console.error);
+    // // Get all entries
+    // client.getSpace('xc32zku7u63j')
+    // .then((space) => space.getEnvironment('master'))
+    // .then((environment) => environment.getEntries())
+    // .then((entries) => {
+    //   // Process the entries
+    //   entries.items.forEach((entry) => {
+    //     console.log(entry.fields.title['en-US']);
+    //   });
+    // })
+    // .catch(console.error);
+
+    // client.getSpace()
+    // .then((space) => space.getEnvironment('master'))
+    // .then((environment) => environment.createEntry('article', {
+    //   fields: {
+    //     title: {
+    //       'en-US': 'Title of Your New Article'
+    //     },
+    //     body: {
+    //       'en-US': 'Content of your article goes here...'
+    //     },
+    //     // Add other fields as necessary
+    //   }
+    // }))
+    // .then((entry) => {
+    //   console.log(entry);
+    //   return entry.publish();  // Optionally publish the entry
+    // })
+    // .catch(console.error);
 });
 
