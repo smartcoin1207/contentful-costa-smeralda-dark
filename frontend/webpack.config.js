@@ -1,6 +1,6 @@
 module.exports = {
     mode: 'development',
-    entry: './main.js',
+    entry: './src/index.js',
     output: {
       filename: './dist/app.js',
       path: __dirname

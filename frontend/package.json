@@ -4,10 +4,11 @@
   "description": "this is wordpress article custom site dashboard",
   "main": "index.js",
   "scripts": {
-    "build:css": "tailwindcss -i ./src/css/app.css -o ./frontend/css/app.css",
-    "watch:css": "tailwindcss -i ./src/css/app.css -o ./frontend/css/app.css webpack ./main.js ./app.js --watch",
-    "build": "webpack --watch"
+    "watch:css": "tailwindcss -i ./src/css/app.css -o ./dist/app.css --watch",
+    "build:js": "webpack --watch",
+    "dev": "npm-run-all --parallel watch:css build:js"
   },
+  
   "keywords": [
     "wordpress"
   ],

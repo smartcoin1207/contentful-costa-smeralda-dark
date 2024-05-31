@@ -38,7 +38,7 @@ echo '<!DOCTYPE html>
     <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>My PHP Project</title>
-        <link rel="stylesheet" href="./frontend/css/app.css">
+        <link rel="stylesheet" href="./frontend/dist/app.css">
         
         <!-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" /> -->
@@ -265,12 +265,10 @@ echo '</ul>';
 echo '</nav>';
 
 echo '</body>
-    <script src="./dist/app.js"></script>
+    <script src="./frontend/dist/app.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js"></script>
     </html>';
 
 // Close the connection
 $conn->close();
 ?>
-
