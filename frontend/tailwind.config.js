@@ -2,7 +2,7 @@
 module.exports = {
   content: [
     '../*.php',
-    './frontend/**/*.{php,html,js}',
+    './src/**/*.{php,html,js}',
     '!./vendor/**',
     '!./_*',
     '!./frontend/_*',
