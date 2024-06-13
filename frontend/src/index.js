@@ -6,13 +6,12 @@ global.process = {
 const contentful_management = require('contentful-management');
 const { richTextFromMarkdown } = require('@contentful/rich-text-from-markdown');
 const TurndownService = require('turndown').default;
-// const turndownService = new TurndownService();
 
 const client = contentful_management.createClient({
-  accessToken: 'accessToken'
+  accessToken: 'ACCESSTOKEN'
 });
 
-const spaceId = 'spaceId';
+const spaceId = 'xc32zku7u63j';
 
 const turndownService = new TurndownService({
   headingStyle: 'atx',
