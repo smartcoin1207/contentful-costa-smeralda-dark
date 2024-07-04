@@ -70,6 +70,7 @@
                 <div class="flex justify-center items-center mt-4">
                     <div class="bg-white shadow-md rounded-lg p-8 w-full max-w-md">
                         <form action="upload.php" method="post" enctype="multipart/form-data" class="space-y-4">
+                            <input type="hidden" name="cmd" value="">
                             <div>
                                 <input type="file" name="file" id="file" required
                                     class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-blue-500">
@@ -121,10 +122,23 @@
                     type="button">
                     Create Json
                 </div>
-                <div data-modal-target="upload-modal" data-modal-toggle="upload-modal"
+                <div id="xmlReadBtn" data-modal-target="upload-modal" data-modal-toggle="upload-modal"
                     class="block h-12 mx-6 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     type="button">
                     Xml Read
+                </div>
+
+                <div id="xmlReadPutBtn" data-modal-target="upload-modal" data-modal-toggle="upload-modal"
+                    class="block px-3"
+                    type="button">
+                    <svg width="50px" height="50px" viewBox="0 0 48 48" fill="blue" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 28H24" stroke="#2a4bd4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M8 37H24" stroke="#2a4bd4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M8 19H40" stroke="#2a4bd4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M8 10H40" stroke="#2a4bd4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M30 33H40" stroke="#2a4bd4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M35 28L35 38" stroke="#2a4bd4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                 </div>
             </div>
         </div>
@@ -314,5 +328,24 @@
 <script> var article_data_json = <?php echo $all_results_json; ?> </script>
 <script src="./frontend/dist/app.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+<script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Get the buttons and the hidden input field
+            const xmlReadBtn = document.getElementById("xmlReadBtn");
+            const xmlReadPutBtn = document.getElementById("xmlReadPutBtn");
+            const cmdInput = document.querySelector("input[name='cmd']");
 
+            // Add click event listener to the Xml Read button
+            xmlReadBtn.addEventListener("click", function () {
+                // Set the value of the hidden input field to "put"
+                cmdInput.value = "";
+            });
+
+            // Add click event listener to the Xml Read Put button
+            xmlReadPutBtn.addEventListener("click", function () {
+                // Set the value of the hidden input field to "put"
+                cmdInput.value = "put";
+            });
+        });
+    </script>
 </html>

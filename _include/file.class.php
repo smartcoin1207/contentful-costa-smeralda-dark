@@ -4,6 +4,10 @@ class FileHandler
 {
     public static function fileUpload()
     {
+        $uploadDir = 'uploads/';
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
         if (isset($_FILES['file']) && $_FILES['file']['error'] == UPLOAD_ERR_OK) {
             $file = $_FILES['file'];
             $fileName = $file['name'];
@@ -12,7 +16,6 @@ class FileHandler
             $fileError = $file['error'];
             $fileType = $file['type'];
 
-            $uploadDir = 'uploads/';
             $uploadFile = $uploadDir . basename($fileName);
 
             if (move_uploaded_file($fileTmpName, $uploadFile)) {
@@ -25,7 +28,7 @@ class FileHandler
         }
     }
 
-    public static function fileReadToDatabase()
+    public static function fileReadToDatabase($cmd = '')
     {
         $db = new Database();
 
@@ -105,17 +108,18 @@ class FileHandler
             echo "Error creating table: " . $db->conn->error;
         }
 
-        //delete exist articles
+        if($cmd != 'put') {
+            //delete exist articles
+            $delete_sql = "DELETE FROM article;";
+            $stmt = $db->conn->prepare($delete_sql);
 
-        $delete_sql = "DELETE FROM article;";
-        $stmt = $db->conn->prepare($delete_sql);
-
-        if ($stmt->execute()) {
-            echo "All records deleted successfully";
-        } else {
-            echo "Error deleting records: " . $stmt->error;
+            if ($stmt->execute()) {
+                echo "All records deleted successfully";
+            } else {
+                echo "Error deleting records: " . $stmt->error;
+            }
         }
-        $c = 0;
+        
         // Insert the data from the XML file into the database table
         foreach ($posts as $post) {
             $title = isset($post['title']) ? $db->conn->real_escape_string($post['title']) : '';
@@ -143,17 +147,9 @@ class FileHandler
             }
 
             $stmt->close();
-            // if($c == 30) {
-            //     break;
-            // }
-            // $c++;
         }
-
-        // die();
-
-        // echo "successfully saved to database";
-
-    // Close the database connection
+        
+        // Close the database connection
         $db->conn->close();
     }
 }

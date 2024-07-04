@@ -112,8 +112,12 @@ class JSONClass {
             /**--------------------------------------- */
 
             try {
+                $uploadDir = 'uploads/';
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0777, true);
+                }
+                
                 $json = json_encode($json_data, JSON_PRETTY_PRINT);
-
                 $current_timestamp = time();
                 $filename = "./uploads/data.json";
                 file_put_contents($filename, $json);
