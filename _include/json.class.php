@@ -11,36 +11,6 @@ class JSONClass {
 
         // Check if there are any results
         if ($result->num_rows > 0) {
-            // Fetch all rows at once
-            $rows = $result->fetch_all(MYSQLI_ASSOC);
-
-            $allDatas = [];
-            // Process the data
-
-            foreach ($rows as $row) {
-               $data = array(
-                'id' => $row['id'],
-                'slugUrl' => basename($row['slug'], "/"),
-                'title' => $row['title'],
-                'coverURL' => $row['image_url'],
-                'coverAlt' => $row['image_text'],
-                'coverLegacy' => false,
-                'coverType' => 'image',
-                'thumbFocus' => 'faces',
-                'articleType' => 'Article',
-                'contentType' => 'article',
-                'updatedAt' => $row['date'],
-                'content' => $row['full_text']
-               );
-
-               $allDatas[] = $data;
-            }
-
-            // $json_data = array(
-            //     "Articles" => array(
-            //         "old" => $allDatas
-            //     )
-            // );
 
             $categorynew_sql = "SELECT DISTINCT category_new FROM categories;";
             $category_result = $conn->query($categorynew_sql);
